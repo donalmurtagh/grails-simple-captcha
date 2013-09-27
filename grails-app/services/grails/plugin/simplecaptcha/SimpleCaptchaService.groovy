@@ -11,6 +11,8 @@ class SimpleCaptchaService {
     static final CAPTCHA_SOLUTION_ATTR = 'captcha'
     static final CAPTCHA_IMAGE_ATTR = 'captchaImage'
 
+    static transactional = false
+
     def grailsApplication
 
     /**
