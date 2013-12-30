@@ -20,11 +20,17 @@ class SimpleCaptchaController {
     private static final DEFAULT_FONT = 'Serif'
 
     private static final ONE_DAY_IN_SECONDS = 60 * 60 * 24
+
     /**
      * If there's already a CAPTCHA in the session, re-use it, otherwise generate a new one. This allows us to show
      * the same CAPTCHA in several places on the same page (which is not possible with ReCaptcha).
      */
-    def captcha = {
+    def captcha() {
+
+        // the browser should never cache the CAPTCHA
+        // https://github.com/domurtag/grails-simple-captcha/issues/1
+        cache false
+
         def captcha = session[SimpleCaptchaService.CAPTCHA_IMAGE_ATTR] ?: newCaptcha()
         ImageIO.write(captcha, "PNG", response.outputStream)
     }
