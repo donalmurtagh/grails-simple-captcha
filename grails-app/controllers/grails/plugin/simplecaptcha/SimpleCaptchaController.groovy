@@ -1,19 +1,20 @@
 package grails.plugin.simplecaptcha
 
-import java.awt.Color
-import java.awt.Font
-import java.awt.Graphics2D
-import java.awt.RenderingHints
-import java.awt.geom.Rectangle2D
-import java.awt.image.BufferedImage
+import org.apache.commons.lang.RandomStringUtils
+import org.springframework.context.MessageSource
+import org.springframework.context.i18n.LocaleContextHolder
+
 import javax.imageio.ImageIO
 import javax.servlet.http.Cookie
-import org.apache.commons.lang.RandomStringUtils
+import java.awt.*
+import java.awt.geom.Rectangle2D
+import java.awt.image.BufferedImage
 
 class SimpleCaptchaController {
 
     def simpleCaptchaService
     def grailsApplication
+    MessageSource messageSource
 
     private static final DEFAULT_CAPTCHA_CHARS = ('A'..'Z').step(1).join()
     private static final DEFAULT_FONT = 'Serif'
@@ -36,6 +37,16 @@ class SimpleCaptchaController {
     }
 
     /**
+     * Look for a locale-specific charset in resource bundles. If one is not found return the global charset
+     * @return the charset from which
+     */
+    private String getCaptchaCharset() {
+
+        String globalCharset = grailsApplication.config?.simpleCaptcha?.chars ?: DEFAULT_CAPTCHA_CHARS
+        messageSource.getMessage('simpleCaptcha.chars', null, globalCharset, LocaleContextHolder.locale)
+    }
+
+    /**
      * Creates a new CAPTCHA, and stores the CAPTCHA image and its solution in the session
      * @return The CAPTCHA image
      */
@@ -43,7 +54,7 @@ class SimpleCaptchaController {
         response.contentType = "image/png"
         response.setHeader("Cache-control", "no-cache")
 
-        String captchaCharset = grailsApplication.config?.simpleCaptcha?.chars ?: DEFAULT_CAPTCHA_CHARS
+        String captchaCharset = getCaptchaCharset()
         String fontName = grailsApplication.config?.simpleCaptcha?.font ?: DEFAULT_FONT
         
         final int height = getParamValue(200, 'height')

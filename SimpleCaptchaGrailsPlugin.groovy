@@ -1,7 +1,7 @@
 class SimpleCaptchaGrailsPlugin {
 
     // the plugin version
-    def version = "0.9.4"
+    def version = "0.9.5"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "1.0 > *"
     // the other plugins this plugin depends on
