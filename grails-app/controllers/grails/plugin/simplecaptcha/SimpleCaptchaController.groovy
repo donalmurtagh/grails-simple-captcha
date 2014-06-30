@@ -2,7 +2,7 @@ package grails.plugin.simplecaptcha
 
 import org.apache.commons.lang.RandomStringUtils
 import org.springframework.context.MessageSource
-import org.springframework.context.i18n.LocaleContextHolder
+import org.springframework.web.servlet.LocaleResolver
 
 import javax.imageio.ImageIO
 import javax.servlet.http.Cookie
@@ -15,6 +15,7 @@ class SimpleCaptchaController {
     def simpleCaptchaService
     def grailsApplication
     MessageSource messageSource
+    LocaleResolver localeResolver
 
     private static final DEFAULT_CAPTCHA_CHARS = ('A'..'Z').step(1).join()
     private static final DEFAULT_FONT = 'Serif'
@@ -49,7 +50,8 @@ class SimpleCaptchaController {
     private String getCaptchaCharset() {
 
         String globalCharset = grailsApplication.config?.simpleCaptcha?.chars ?: DEFAULT_CAPTCHA_CHARS
-        messageSource.getMessage('simpleCaptcha.chars', null, globalCharset, LocaleContextHolder.locale)
+        Locale locale = localeResolver.resolveLocale(request)
+        messageSource.getMessage('simpleCaptcha.chars', null, globalCharset, locale)
     }
 
     /**

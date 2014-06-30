@@ -1,5 +1,6 @@
 package grails.plugin.simplecaptcha
 
+import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest
 import org.codehaus.groovy.grails.web.util.WebUtils
 
@@ -13,7 +14,7 @@ class SimpleCaptchaService {
 
     static transactional = false
 
-    def grailsApplication
+    GrailsApplication grailsApplication
 
     /**
      * Indicates if the CAPTCHA was solved correctly
@@ -44,9 +45,9 @@ class SimpleCaptchaService {
 
             //	Remove the cookie if we have a response
             if (response) {
-                Cookie c = new Cookie(CAPTCHA_SOLUTION_ATTR, null)
-                c.maxAge = 0
-                response.addCookie(c)
+                Cookie solutionCookie = new Cookie(CAPTCHA_SOLUTION_ATTR, null)
+                solutionCookie.maxAge = 0
+                response.addCookie(solutionCookie)
             }
 
             captchaSolution ? solution == encode(captchaSolution) : false
