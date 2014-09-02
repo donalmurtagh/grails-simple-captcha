@@ -30,7 +30,7 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        runtime ":cache-headers:1.1.5"
+        runtime ":cache-headers:1.1.7"
 
         build ":tomcat:$grailsVersion"
 
