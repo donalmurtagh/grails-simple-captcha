@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/domurtag/grails-simple-captcha.svg?branch=master)](https://travis-ci.org/domurtag/grails-simple-captcha)
+
 Simple CAPTCHA Grails Plugin
 =====================
 
