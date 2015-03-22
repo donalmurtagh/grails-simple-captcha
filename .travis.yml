@@ -4,7 +4,7 @@ jdk:
 - oraclejdk7
 
 env:
-- GRAILS_VERSION=2.1.5
+- GRAILS_VERSION=2.4.4
 
 before_install:
 - rm -rf ~/.gvm
