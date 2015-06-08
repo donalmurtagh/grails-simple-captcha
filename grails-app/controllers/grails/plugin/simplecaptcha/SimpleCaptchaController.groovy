@@ -1,5 +1,6 @@
 package grails.plugin.simplecaptcha
 
+import grails.core.GrailsApplication
 import org.apache.commons.lang.RandomStringUtils
 import org.springframework.context.MessageSource
 import org.springframework.web.servlet.LocaleResolver
@@ -12,8 +13,8 @@ import java.awt.image.BufferedImage
 
 class SimpleCaptchaController {
 
-    def simpleCaptchaService
-    def grailsApplication
+    SimpleCaptchaService simpleCaptchaService
+    GrailsApplication grailsApplication
     MessageSource messageSource
     LocaleResolver localeResolver
 
@@ -30,7 +31,6 @@ class SimpleCaptchaController {
 
         // the browser should never cache the CAPTCHA
         // https://github.com/domurtag/grails-simple-captcha/issues/1
-        cache false
 
         def captcha = session[SimpleCaptchaService.CAPTCHA_IMAGE_ATTR] ?: newCaptcha()
         ImageIO.write(captcha, "PNG", response.outputStream)
@@ -64,7 +64,7 @@ class SimpleCaptchaController {
 
         String captchaCharset = getCaptchaCharset()
         String fontName = grailsApplication.config?.simpleCaptcha?.font ?: DEFAULT_FONT
-        
+
         final int height = getParamValue(200, 'height')
         final int width = getParamValue(200, 'width')
         final int fontSize = getParamValue(24, 'fontSize')
@@ -139,8 +139,8 @@ class SimpleCaptchaController {
             def cookieValue = simpleCaptchaService.encode(captchaSolution).encodeAsURL()
             Cookie cookie = new Cookie(SimpleCaptchaService.CAPTCHA_SOLUTION_ATTR, cookieValue)
             cookie.maxAge = ONE_DAY_IN_SECONDS
-			cookie.path = '/'
-			response.addCookie(cookie)
+            cookie.path = '/'
+            response.addCookie(cookie)
         }
         captchaImage
     }

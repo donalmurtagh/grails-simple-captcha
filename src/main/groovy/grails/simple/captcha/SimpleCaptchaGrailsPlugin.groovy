@@ -1,14 +1,17 @@
-class SimpleCaptchaGrailsPlugin {
+package grails.simple.captcha
+
+import grails.plugins.*
+class SimpleCaptchaGrailsPlugin extends Plugin {
 
     // the plugin version
-    def version = "1.0.0"
+    def version = "1.0-SNAPSHOT"
     // the version or versions of Grails the plugin is designed for
-    def grailsVersion = "1.0 > *"
+    def grailsVersion = "3.0.1 > *"
     // the other plugins this plugin depends on
     def dependsOn = [:]
     // resources that are excluded from plugin packaging
     def pluginExcludes = ["grails-app/conf", "grails-app/domain", "grails-app/i18n", "grails-app/utils",
-            "grails-app/views", "lib", "scripts", "web-app", "grails-app/views/error.gsp"]
+                          "grails-app/views", "lib", "scripts", "web-app", "grails-app/views/error.gsp"]
 
     def title = "Simple Captcha Plugin"
     def author = "Donal Murtagh"
@@ -16,6 +19,7 @@ class SimpleCaptchaGrailsPlugin {
     def description = '''\
 Creates simple image CAPTCHAs that protect against automated completion and submission of HTML forms
 '''
+    def profiles = ['web']
 
     // URL to the plugin's documentation
     def documentation = "http://grails.org/plugin/simple-captcha"
