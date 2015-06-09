@@ -19,6 +19,7 @@ class SimpleCaptchaGrailsPlugin extends Plugin {
     def description = '''\
 Creates simple image CAPTCHAs that protect against automated completion and submission of HTML forms
 '''
+    def developers = [[name: 'Donal Murtagh', email: 'domurtag@yahoo.co.uk'], [name: 'Rohit Bishnoi', email: 'rbdharnia@gmail.com']]
     def profiles = ['web']
 
     // URL to the plugin's documentation
