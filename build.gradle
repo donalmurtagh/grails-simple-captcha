@@ -19,6 +19,19 @@ plugins {
 version "1.0.0"
 group "org.grails.plugins"
 
+bintray {
+  pkg {
+    name = "domurtag.plugins:$project.name"
+    issueTrackerUrl = "https://github.com/domurtag/grails-simple-captcha/issues"
+    vcsUrl = "https://github.com/domurtag/grails-simple-captcha"
+    version {
+      attributes = ['grails-plugin': "domurtag.plugins:$project.name"]
+      name = project.version
+    }
+  }
+}
+
+
 apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
