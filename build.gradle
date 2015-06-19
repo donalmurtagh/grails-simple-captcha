@@ -16,21 +16,8 @@ plugins {
     id "com.jfrog.bintray" version "1.2"
 }
 
-version "1.0.0"
+version "1.0.0-grails3"
 group "domurtag.plugins"
-
-bintray {
-    pkg {
-        name = "domurtag.plugins:$project.name"
-        issueTrackerUrl = "https://github.com/domurtag/grails-simple-captcha/issues"
-        vcsUrl = "https://github.com/domurtag/grails-simple-captcha"
-        version {
-            attributes = ['grails-plugin': "domurtag.plugins:$project.name"]
-            name = project.version
-        }
-    }
-}
-
 
 apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
@@ -39,8 +26,8 @@ apply plugin: "spring-boot"
 apply plugin: "org.grails.grails-plugin"
 apply plugin: "org.grails.grails-gsp"
 // Used for publishing to central repository, remove if not needed
-apply from: 'https://raw.githubusercontent.com/grails/grails-profile-repository/master/profiles/plugin/templates/grailsCentralPublishing.gradle'
-apply from: 'https://raw.githubusercontent.com/grails/grails-profile-repository/master/profiles/plugin/templates/bintrayPublishing.gradle'
+apply from:'https://raw.githubusercontent.com/grails/grails-profile-repository/master/profiles/plugin/templates/grailsCentralPublishing.gradle'
+apply from:'https://raw.githubusercontent.com/grails/grails-profile-repository/master/profiles/plugin/templates/bintrayPublishing.gradle'
 
 ext {
     grailsVersion = project.grailsVersion
@@ -81,4 +68,17 @@ dependencies {
 
 task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion
+}
+
+bintray {
+  pkg {
+    userOrg = '' // If you want to publish to an organization
+    name = "domurtag.plugins:grails-simple-captcha"
+    issueTrackerUrl = "https://github.com/domurtag/grails-simple-captcha/issues"
+    vcsUrl = "https://github.com/domurtag/grails-simple-captcha"
+    version {
+      attributes = ['grails-plugin': "domurtag.plugins:grails-simple-captcha"]
+      name = project.version
+    }
+  }
 }
