@@ -4,12 +4,12 @@
 
 Grails plugin that creates simple image CAPTCHAs that protect against automated completion and submission of HTML forms.
 
+## Grails Versions
+
+Versions of this plugin that are compatible with Grails 1.X and 2.X are on the master branch. Grails 3.X compatible versions are on the grails3 branch. The first Grails 3 compatible version is `1.0.0-grails3`. 
+
 ## Description
 
-### Grails Versions
-
-Versions of this plugin that are compatible with Grails 1.X and 2.X are on the master branch. Grails 3.X compatible versions are on the grails3 branch. The first Grails 3 compatible version is `1.0.0-grails3`.                                                           
-                                                        
 ### Overview
 
 A CAPTCHA is a small image that is embedded in a HTML form to protect against automated completion and submission of HTML forms. 
