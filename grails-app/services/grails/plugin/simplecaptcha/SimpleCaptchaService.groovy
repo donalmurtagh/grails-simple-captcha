@@ -1,20 +1,16 @@
 package grails.plugin.simplecaptcha
 
-import grails.core.GrailsApplication
-import org.grails.web.servlet.mvc.GrailsWebRequest
-import org.grails.web.util.WebUtils
+import grails.web.api.ServletAttributes
 
-import java.security.MessageDigest
 import javax.servlet.http.Cookie
+import java.security.MessageDigest
 
-class SimpleCaptchaService {
+class SimpleCaptchaService implements ServletAttributes {
 
     static final CAPTCHA_SOLUTION_ATTR = 'captcha'
     static final CAPTCHA_IMAGE_ATTR = 'captchaImage'
 
     static transactional = false
-
-    GrailsApplication grailsApplication
 
     /**
      * Indicates if the CAPTCHA was solved correctly
@@ -23,11 +19,8 @@ class SimpleCaptchaService {
      */
     boolean validateCaptcha(String captchaSolution) {
 
-        GrailsWebRequest webRequest = WebUtils.retrieveGrailsWebRequest()
-
         if (storeInSession()) {
             //	extract the value from the session
-            def session = webRequest.session
             String solution = session[CAPTCHA_SOLUTION_ATTR]
 
             // remove the CAPTCHA so a new one will be generated next time one is requested
@@ -38,10 +31,7 @@ class SimpleCaptchaService {
 
         } else {
             //	We'll use the cookie instead
-            def request = webRequest.currentRequest
-            String solution = readCookie(CAPTCHA_SOLUTION_ATTR, request)
-
-            def response = webRequest.currentResponse
+            String solution = readCookie(CAPTCHA_SOLUTION_ATTR)
 
             //	Remove the cookie if we have a response
             if (response) {
@@ -82,7 +72,7 @@ class SimpleCaptchaService {
      * @param name The name used to store the cookie
      * @return The value of the cookie, or null if no such value exists
      */
-    private String readCookie(String name, request) {
+    private String readCookie(String name) {
 
         //	Get all the cookies
         def cookie = request.cookies?.find {it.name == name}
