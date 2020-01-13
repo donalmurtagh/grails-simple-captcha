@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/domurtag/grails-simple-captcha.svg?branch=master)](https://travis-ci.org/domurtag/grails-simple-captcha)
+[![Build Status](https://travis-ci.org/donalmurtagh/grails-simple-captcha.svg?branch=master)](https://travis-ci.org/donalmurtagh/grails-simple-captcha)
 
 ## Summary
 
